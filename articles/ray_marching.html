@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray Marching | HaydenD100</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="brand">HaydenD100</a>
+            <div class="links">
+                <a href="index.html">Index</a>
+                <a href="about.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="specs.html">Specs</a>
+                <a href="blog.html" class="active">Blog</a>
+            </div>
+        </div>
+    </nav>
+    <main>
+            <article class="blog-post">
+                <header class="post-header">
+                    <span class="post-category">// ENGINE_LOG</span>
+                    <h1>Ray Marching and SDFs</h1>
+                    <div class="post-meta-data">
+                        <span>DATE: 2026.03.17</span>
+                        <span>TAGS: GRAPHICS, SHADERS, C++</span>
+                    </div>
+                </header>
+
+                <section class="content">
+                    <p>Before we get into how I implemented ray marching I want to briefly cover how it works and also explain what Signed Distance Field Functions are.</p>
+
+                    <h2>Signed Distance Field Functions</h2>
+                    <p>First we need to talk about <a href="https://en.wikipedia.org/wiki/Signed_distance_function">Signed Distance Field Function (SDF)</a>. SDF are functions that given a point will tell you how close you are to the surface of an object, the SDF of a circle would be the distance between the middle of the circle and the point given to the function minus the radius of the circle. There are <a href="https://iquilezles.org/articles/distfunctions/">tons of SDF functions</a> for all types of primitive shapes.</p>
+
+                    <h2>Ray Marching</h2>
+                    <p>Ray marching is a type of ray tracing where we “March” along the path of the ray until it reaches the object, the distance of each march is calculated by taking the result of every object's SDF functions and using the shortest distance. <a href="https://www.youtube.com/watch?v=BNZtUB7yhX4">This video</a> does a great job explaining how it works in depth.</p>
+
+                    <p>When I first learned about Ray Marching and Signed distance field Functions, I thought it was so interesting, I really liked the idea of being able to represent objects as functions. Using ray marching you can render some pretty cool geometry that otherwise would be very expensive to render with vertices. The geometry that we render with ray marching is also pixel perfect compared to vertices where high vert count is needed to render smooth objects without normal maps. There are also functions to mix SDF functions of objects giving this combined effect, I'll showcase this later with Meta balls.</p>
+
+                    <h2>My Implementation</h2>
+                    <p>The ray marching rendering in my engine is all done within a compute shader which runs per frame. The compute shader renders the SDF function geometry to the <a href="https://en.wikipedia.org/wiki/Deferred_shading">G buffer</a> where lighting is applied with all the other geometry.</p>
+
+                    <div class="project-card">
+                        <img src="../src/MetaBalls_Screen.png" alt="Metaballs Rendering" style="width:100%; border:1px solid var(--border); margin-bottom:1rem;">
+                        <p><em>The above picture shows Metaballs being rendered using ray marching in my Rendering Engine.</em></p>
+                    </div>
+
+                    <p>Metaballs are spheres that pull and mend with each other creating these blobs. This would be very expensive to render with vertices and would also make them static, moving the blobs in real time would have no effect on the performance of the rendering. </p>
+                    <p>That's pretty much it for this article, I want to explore ray marching a bit more in the future, right now my engine only supports the metaballs but I'd like to expand on what kind of SDF functions can be passed to the renderer.</p>
+                </section>
+
+                <footer class="post-footer">
+                    <a href="../blog.html"><- Back to Archive</a>
+                </footer>
+            </article>
+        </main>
+    <footer>
+        <p>&copy; 2026 HaydenD100. All logs are self-published.</p>
+    </footer>
+
+</body>
+</html>
