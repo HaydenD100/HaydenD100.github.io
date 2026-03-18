@@ -33,15 +33,15 @@
                     <p>Before we get into how I implemented ray marching I want to briefly cover how it works and also explain what Signed Distance Field Functions are.</p>
 
                     <h2>Signed Distance Field Functions</h2>
-                    <p>First we need to talk about <a href="https://en.wikipedia.org/wiki/Signed_distance_function">Signed Distance Field Function (SDF)</a>. SDF are functions that given a point will tell you how close you are to the surface of an object, the SDF of a circle would be the distance between the middle of the circle and the point given to the function minus the radius of the circle. There are <a href="https://iquilezles.org/articles/distfunctions/">tons of SDF functions</a> for all types of primitive shapes.</p>
+                    <p>First we need to talk about <a href="https://en.wikipedia.org/wiki/Signed_distance_function" target="_blank">Signed Distance Field Function (SDF)</a>. SDF are functions that given a point will tell you how close you are to the surface of an object, the SDF of a circle would be the distance between the middle of the circle and the point given to the function minus the radius of the circle. There are <a href="https://iquilezles.org/articles/distfunctions/">tons of SDF functions</a> for all types of primitive shapes.</p>
 
                     <h2>Ray Marching</h2>
-                    <p>Ray marching is a type of ray tracing where we “March” along the path of the ray until it reaches the object, the distance of each march is calculated by taking the result of every object's SDF functions and using the shortest distance. <a href="https://www.youtube.com/watch?v=BNZtUB7yhX4">This video</a> does a great job explaining how it works in depth.</p>
+                    <p>Ray marching is a type of ray tracing where we “March” along the path of the ray until it reaches the object, the distance of each march is calculated by taking the result of every object's SDF functions and using the shortest distance. <a href="https://www.youtube.com/watch?v=BNZtUB7yhX4" target="_blank">This video</a> does a great job explaining how it works in depth.</p>
 
                     <p>When I first learned about Ray Marching and Signed distance field Functions, I thought it was so interesting, I really liked the idea of being able to represent objects as functions. Using ray marching you can render some pretty cool geometry that otherwise would be very expensive to render with vertices. The geometry that we render with ray marching is also pixel perfect compared to vertices where high vert count is needed to render smooth objects without normal maps. There are also functions to mix SDF functions of objects giving this combined effect, I'll showcase this later with Meta balls.</p>
 
                     <h2>My Implementation</h2>
-                    <p>The ray marching rendering in my engine is all done within a compute shader which runs per frame. The compute shader renders the SDF function geometry to the <a href="https://en.wikipedia.org/wiki/Deferred_shading">G buffer</a> where lighting is applied with all the other geometry.</p>
+                    <p>The ray marching rendering in my engine is all done within a compute shader which runs per frame. The compute shader renders the SDF function geometry to the <a href="https://en.wikipedia.org/wiki/Deferred_shading" target="_blank">G buffer</a> where lighting is applied with all the other geometry.</p>
 
                     <div class="project-card">
                         <img src="../src/MetaBalls_Screen.png" alt="Metaballs Rendering" style="width:100%; border:1px solid var(--border); margin-bottom:1rem;">
